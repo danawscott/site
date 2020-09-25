@@ -1,0 +1,15 @@
+; Exclude HTML output
+*.html
+
+; Exclude Org source
+*.org
+
+robots.txt
+
+sitemap.xml
+
+; Exclude stylesheets
+*.css
+
+; Include README in the Org format
+!README.org

@@ -1,0 +1,73 @@
+#+TITLE: README for site
+
+* AUTHORS
+Dana Scott <dana@danawscott.com>
+
+* Deployment
+** Local development
+The HTML files are written either by [[https://orgmode.org][Org mode]] or hand.  Then, they're
+transferred to a server using [[https://rsync.samba.org][rsync]].
+
+Prerequisite:
+
+: sudo apt-get install emacs-goodies-el
+
+Use the actual domain in the project:
+
+: (setq local nil)
+
+: M-x org-publish
+
+** Server configuration
+Add the ssh user to the server group:
+
+: sudo usermod -aG nginx dana
+
+Then, log out and in.
+
+Make a directory on the server to store the files:
+
+: sudo mkdir -v /srv/danawscott/
+: sudo chown -R dana:nginx /srv/danawscott/
+
+** Perform a /dry run/:
+   :PROPERTIES:
+   :VISIBILITY: all
+   :END:
+
+#+BEGIN_SRC shell :results output silent value verbatim
+
+rsync -n -v -a -u -z -i \
+--super \
+--delete-excluded \
+--groupmap=dana:nginx \
+-f "- *~" \
+-f "- config.el" \
+-f "- COPYING" \
+-f "- *.org" \
+-f "- #*#" \
+--progress \
+~/backup/offprem/wiki/site/ vps1:/srv/danawscott
+
+#+END_SRC
+
+** Perform the /actual transfer/:
+   :PROPERTIES:
+   :VISIBILITY: all
+   :END:
+
+#+BEGIN_SRC shell :results output silent value verbatim
+
+rsync -v -a -u -z -i \
+--super \
+--delete-excluded \
+--groupmap=dana:nginx \
+-f "- *~" \
+-f "- config.el" \
+-f "- COPYING" \
+-f "- *.org" \
+-f "- #*#" \
+--progress \
+~/backup/offprem/wiki/site/ vps1:/srv/danawscott
+
+#+END_SRC
