@@ -54,10 +54,10 @@
       '(("site" . local-or-domain)))
 
 (setq org-publish-project-alist
-      '(("site"
-         :base-directory "~/backup/offprem/wiki/site"
+      `(("site"
+         :base-directory ,(concat org-directory "site")
          :exclude "README.org"
-         :publishing-directory "~/backup/offprem/wiki/site"
+         :publishing-directory ,(concat org-directory "site")
          :recursive t
          :publishing-function org-html-publish-to-html
          ;; "publish htmlized source"
