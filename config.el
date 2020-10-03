@@ -53,6 +53,11 @@
 (setq org-link-abbrev-alist
       '(("site" . local-or-domain)))
 
+(setq site-html-head
+  (concat "<link rel=\"stylesheet\" href=\"/style.css\">\n"
+          "<link href=\"https://fonts.googleapis.com/css2?family=Thasadith&display=swap\" rel=\"stylesheet\">\n"
+          "<script src=\"https://cdn.usefathom.com/script.js\" site=\"VZKVQXLI\" honor-dnt=\"true\" defer></script>"))
+
 (setq org-publish-project-alist
       `(("site"
          :base-directory ,(concat org-directory "site")
@@ -76,9 +81,7 @@
          ;; exclude the value of org-html-scripts
          :html-head-include-scripts nil
          ;; "Use 'org-html-head' to use your own style information"
-         :html-head "<link rel=\"stylesheet\" href=\"/style.css\">"
-         ;; "More head information to add in the HTML output"
-         :html-head-extra "<link href=\"https://fonts.googleapis.com/css2?family=Thasadith&display=swap\" rel=\"stylesheet\">"
+         :html-head ,site-html-head
          ;; use "new HTML5 elements"
          :html-html5-fancy t
          :html-postamble "<p>Copyright © 2020 Dana Scott</p>"
