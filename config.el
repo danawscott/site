@@ -27,26 +27,26 @@
 ;; python3 -m http.server 8000 --bind 127.0.0.1
 ;; see https://docs.python.org/3/library/http.server.html
 
-(defvar local
+(defvar site-local
   "configure a site for a local machine if t or a server if nil")
 
-(setq local nil)
+(setq site-local nil)
 
 (defconst localhost "http://localhost:8000")
 
 (defconst domainhost "https://danawscott.com")
 
 (defun site-preamble (_plist)
-  (let ((host (if local localhost domainhost)))
+  (let ((host (if site-local localhost domainhost)))
     (concat "<nav>"
             "<ol>"
             (format "<li><a href=\"%s\">Home</a></li>" host)
-            (format "<li><a href=\"%s/2/projects%s\">Projects</a></li>" host (if local ".html" ""))
+            (format "<li><a href=\"%s/2/projects%s\">Projects</a></li>" host (if site-local ".html" ""))
             "</ol>"
             "</nav>")))
 
 (defun local-or-domain (tag)
-  (if local
+  (if site-local
       (concat localhost tag ".html")
     (concat domainhost tag)))
 

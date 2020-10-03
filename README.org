@@ -14,7 +14,7 @@ Prerequisite:
 
 Use the actual domain in the project:
 
-: (setq local nil)
+: (setq site-local nil)
 
 : M-x org-publish
 
