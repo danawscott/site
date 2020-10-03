@@ -66,7 +66,7 @@
          :recursive t
          :publishing-function org-html-publish-to-html
          ;; "publish htmlized source"
-         ;; :htmlized-source t
+         :htmlized-source t
          :html-checkbox-type html
          :html-container "section"
          ;; "The cdrs of each entry are the ELEMENT_TYPE and ID for each
